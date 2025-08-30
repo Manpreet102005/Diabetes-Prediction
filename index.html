@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Diabetes Prediction</h1>
-    <br>
-    <div class="form_div">
+    <h1>Female Diabetes Prediction</h1>
+    <span class="form_span">
         <form method="post">
-            <label>Enter the following details:</label><br>
-            <label>Glucose Level:</label>
-            <input type="number" id="glucose_level"><br>
-            <label>Blood Pressure:</label>
-            <input type="number" id="bp_level"><br>
-        </form>
-    </div>
+            <label class="labels">Age (years):</label>
+            <input class="input" type="number" id="age"><br><br>
+            <label class="labels">Glucose Level:</label>
+            <input class="input" type="number" id="glucose_level"><br><br>
+            <label class="labels">Blood Pressure (mm Hg):</label>
+            <input class="input" type="number" id="bp_level"><br><br>
+            <label class="labels">Insulin (mu U/ml):</label>
+            <input class="input" type="number" id="insulin_level"><br><br>
+            <label class="labels">Weight (kg):</label>
+            <input class="input" type="number"id='weight'><br><br>
+            <label class="labels">Height (m):</label>
+            <input class="input" type="number" id="height" ><br><br>
+            <label class="labels">Do any of your first-degree relatives<br> (parents, siblings) have diabetes?</label>
+            <span class="radio_1">
+                <input type="radio" id="first_degree_yes" name="first_degree_diabetes" value="yes">
+                <label for="first_degree_yes">Yes</label>
+                <input type="radio" id="first_degree_no" name="first_degree_diabetes" value="no">
+                <label for="first_degree_no">No</label>
+            </span>
+            <br><br>
+            <label class="labels">Do any of your second-degree relatives<br> (grandparents, aunts/uncles) have diabetes?</label>
+            <span class="radio_2">
+                <input type="radio" id="second_degree_yes" name="second_degree_diabetes" value="yes">
+                <label for="second_degree_yes">Yes</label>
+                <input type="radio" id="second_degree_no" name="second_degree_diabetes" value="no">
+                <label for="second_degree_no">No</label>
+            </span>
+            <br><br>            
+            <label class="labels">Total No. of Pregnancies:</label>
+            <input class="input" type="number" id="pregnancies_no"><br>
+            <button class="submit_btn" type="submit">Submit</button>
+            <button class="reset_btn" type="reset">Reset</button>
+        </form><br>
+        <h3>Prediction: {{ prediction }}</h3>
+    </span>
 </body>
 </html>
