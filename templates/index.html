@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="static\style.css">
+</head>
+<body>
+    <h1>Female Diabetes Predictor</h1>
+    <span class="form_span">
+        <form method="POST" action="/predict">
+            <label class="labels">Age (years):</label>
+            <input required class="input" type="number"  name="age"><br><br>
+            <label class="labels">Glucose Level:</label>
+            <input required class="input" type="number"  name="glucose_level"><br><br>
+            <label class="labels">Blood Pressure (mm Hg):</label>
+            <input required class="input" type="number"  name="bp_level"><br><br>
+            <label class="labels">Insulin (mu U/ml):</label>
+            <input required class="input" type="number"  name="insulin_level"><br><br>
+            <label class="labels">Weight (kg):</label>
+            <input required class="input" type="number" name='weight'><br><br>
+            <label class="labels">Height (m):</label>
+            <input required class="input" type="number"  name="height" ><br><br>
+            <label class="labels">Total No. of Pregnancies:</label>
+            <input required class="input" type="number" name="pregnancies" ><br><br>
+            <label class="labels">Do any of your first-degree relatives<br> (parents, siblings) have diabetes?</label>
+            <span class="radio_1">
+                <input type="radio" id="first_degree_yes" name="first_degree_diabetes" value="yes">
+                <label for="first_degree_yes">Yes</label>
+                <input type="radio" id="first_degree_no" name="first_degree_diabetes" value="no">
+                <label for="first_degree_no">No</label>
+            </span>
+            <br><br>
+            <label class="labels">Do any of your second-degree relatives<br> (grandparents, aunts/uncles) have diabetes?</label>
+            <span class="radio_2">
+                <input type="radio" id="second_degree_yes" name="second_degree_diabetes" value="yes">
+                <label for="second_degree_yes">Yes</label>
+                <input type="radio" id="second_degree_no" name="second_degree_diabetes" value="no">
+                <label for="second_degree_no">No</label>
+            </span>
+            <br>            
+            <button class="submit_btn" type="submit">Submit</button>
+            <button class="reset_btn" type="button" onclick="window.location.href='/'">Reset</button>
+        </form><br>
+        <span class="result">
+        {% if prediction %}
+            <h2>Prediction:</h2>
+            <h2>{{ prediction }}</h2>
+        {% endif %} 
+        </span>
+    <script>for(i of document.querySelectorAll('input[type=number]'))i.step='any'</script>
+    </span>
+</body>
+</html>
