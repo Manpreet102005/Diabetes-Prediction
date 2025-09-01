@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import joblib
 from flask import Flask, render_template, request , jsonify
 from util import processing_inputs
 
@@ -26,20 +25,21 @@ def predict():
             f_d_y = request.form.get('first_degree_diabetes')
             s_d_y = request.form.get('second_degree_diabetes')
 
-            prediction_bin = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
-            if prediction_bin == 1:
-                prediction = "Diabetic"
-            elif prediction_bin == 0:
-                prediction = "Non Diabetic"
+            prediction_bin,error_message = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
+            if error_message:
+                prediction=error_message
             else:
-                prediction=prediction_bin
+                if prediction_bin == 1:
+                    prediction = "Diabetic"
+                elif prediction_bin==0:
+                    prediction = "Non Diabetic"
         except Exception as e:
             error_message = "Enter Valid Inputs"
-            return render_template("index.html", prediction=error_message)
+            return render_template("index.html", error_message=error_message)
 
     return render_template("index.html",prediction=prediction)
 
-app.route("/api/predict",methods=['POST'])
+@app.route("/api/predict",methods=['POST'])
 def api_predict():
     prediction = None
     if request.method == 'POST':
@@ -54,11 +54,13 @@ def api_predict():
              height = data.get('height')
              f_d_y = data.get('first_degree_diabetes')
              s_d_y = data.get('second_degree_diabetes')
-             prediction=processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d_y)
+             prediction,error_message=processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d_y)
+             if error_message:
+                 return jsonify({'error':error_message})
         except Exception as e:
             error_message=f'Error: {str(e)}'
-            return jsonify(error_message)
-    return jsonify(prediction)
+            return jsonify({'error':error_message})
+    return jsonify({'prediction':prediction})
 
 if __name__ == '__main__':
     app.run(debug=True)

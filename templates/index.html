@@ -43,18 +43,17 @@
             <button class="submit_btn" type="submit">Submit</button>
             <button class="reset_btn" type="button" onclick="window.location.href='/'">Reset</button>
         </form><br>
-        <span class="result">
-        {% if prediction%}
-            {% if prediction ==1 or prediction ==0 %}
-                <h2>Prediction:</h2>
-                <h2>{{ prediction }}</h2>
+            <span class="result">
+        {% if prediction %}
+            <h2>Prediction:</h2>
+            {% if prediction == 1 %}
+                <h2 >Diabetic</h2>
             {% else %}
-                <h2>Error:</h2>
-                <h2>{{ prediction }}</h2>
-            {% endif %}    
-        {% endif %} 
-        </span>
-    <script>for(i of document.querySelectorAll('input[type=number]'))i.step='any'</script>
+                <h2 >Non Diabetic</h2>
+            {% endif %}
+        {% endif %}
+        <script>document.querySelectorAll('input[type=number]').forEach(i=>i.setAttribute('step','any'))</script>
+
     </span>
 </body>
 </html>
