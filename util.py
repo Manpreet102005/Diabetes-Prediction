@@ -1,6 +1,11 @@
 import numpy as np
 import pandas as pd
 import joblib
+import numpy.core._multiarray_umath
+import numpy.core._dtype_ctypes
+import joblib
+
+
 def bmi_calc(weight, height):
     return weight / (height ** 2)
 
@@ -21,7 +26,7 @@ def diabetes_pedigree(first_degree_diabetes, second_degree_diabetes, age):
     return base
 
 skin_thickness_df = pd.read_parquet("skinthickness.parquet")
-scaler = joblib.load("scaler.pkl")
+scaler = joblib.load('scaler.pkl')
 model = joblib.load("Diabetes-Prediction.pkl")
 
 def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d_y):
@@ -35,15 +40,15 @@ def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d
     bmi = bmi_calc(weight, height)
     dpf = diabetes_pedigree(f_d_y, s_d_y, age)
     skin_thickness = float(np.mean(skin_thickness_df))
-
+    error_message=None
     x=[age,glucose,bp,insulin,bmi]
     for value in x:
-        if x<=0:
-            error_message="Enter Valid Inputs"
-            return error_message           
+        if value<=0:
+            error_message="Enter Valid Input(s)"
+            return None,error_message           
     if pregnancies<0:
         error_message="No. of Pregnancies Can't be Negative"
-        return error_message
+        return None,error_message
     X_cols = {
         'Pregnancies': [pregnancies],
         'Glucose': [glucose],

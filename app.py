@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
+import joblib
 from flask import Flask, render_template, request , jsonify
 from util import processing_inputs
 
 
 app = Flask(__name__)
-
 @app.route("/", methods=['GET'])
 def home():
     return render_template("index.html", prediction=None)
