@@ -27,6 +27,7 @@ def diabetes_pedigree(first_degree_diabetes, second_degree_diabetes, age):
 
 skin_thickness_df = pd.read_parquet("skinthickness.parquet")
 scaler = joblib.load('scaler.pkl')
+transformer=joblib.load('transformer.pkl')
 model = joblib.load("Diabetes-Prediction.pkl")
 
 def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d_y):
@@ -61,6 +62,8 @@ def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d
     }
     
     X = pd.DataFrame(X_cols)
+    trans_cols=['Pregnancies','SkinThickness','Insulin','DiabetesPedigreeFunction','Age']
+    X[trans_cols]=transformer.transform(X[trans_cols])
     scaled_X = scaler.transform(X)
     prediction= model.predict(scaled_X)[0]
     return prediction,error_message
