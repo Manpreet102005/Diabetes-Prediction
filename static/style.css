@@ -69,18 +69,19 @@ h3{
 @media (max-width:430px){
     .form-box{
         width: 310px;
+        height: 600px;
+        position: relative;
     }
     .outer-box {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: relative;
-        left:50px
     }
     .row-radio{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     .radio_label{
         text-align: center;
@@ -98,11 +99,11 @@ h3{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: relative;
-        left:65px;
     }
     .form-box{
-        width:300px;
+        width:310px;
+        height: 600px;
+        position: relative;
     }
     .input{
         width:140px
@@ -120,8 +121,7 @@ h3{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: relative;
-        left:80px;
+
     }
     .form-box{
         width:300px;
