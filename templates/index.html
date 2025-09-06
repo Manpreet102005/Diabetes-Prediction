@@ -78,11 +78,7 @@
         <span class="result">
             {% if prediction %}
                 <h2>Prediction:</h2>
-                {% if prediction == 1 %}
-                <h2>Diabetic</h2>
-                {% if prediction ==0 %}
-                <h2>Non Diabetic</h2>
-                {% endif %}
+                <h2>{{prediction}}</h2>
             {% endif %}
         </span>
         <script>document.querySelectorAll('input[type=number]').forEach(i => i.setAttribute('step', 'any'))</script>
