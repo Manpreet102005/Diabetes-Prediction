@@ -35,8 +35,7 @@ def predict():
                     prediction = "Non Diabetic"
         except Exception as e:
             error_message = "Enter Valid Inputs"
-            prediction=error_message
-            return render_template("index.html", prediction=prediction)
+            return render_template("index.html", error_message=error_message)
 
     return render_template("index.html",prediction=prediction)
 
