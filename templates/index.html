@@ -1,59 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes Prediction</title>
     <link rel="stylesheet" href="static\style.css">
 </head>
+
 <body>
-    <h1>Female Diabetes Predictor</h1>
-    <span class="form_span">
-        <form method="POST" action="/predict">
-            <label class="labels">Age (years):</label>
-            <input value="{{age or ''}}" required class="input" type="number"  name="age"><br><br>
-            <label class="labels">Glucose Level:</label>
-            <input value="{{glucose_level or ''}}" required class="input" type="number"  name="glucose_level"><br><br>
-            <label class="labels">Blood Pressure (mm Hg):</label>
-            <input value="{{bp_level or ''}}" required class="input" type="number"  name="bp_level"><br><br>
-            <label class="labels">Insulin (mu U/ml):</label>
-            <input value="{{insulin_level or ''}}" required class="input" type="number"  name="insulin_level"><br><br>
-            <label class="labels">Weight (kg):</label>
-            <input value="{{weight or ''}}" required class="input" type="number" name='weight'><br><br>
-            <label class="labels">Height (m):</label>
-            <input value="{{height or ''}}" required class="input" type="number"  name="height" ><br><br>
-            <label class="labels">Total No. of Pregnancies:</label>
-            <input value="{{pregnancies or ''}}" required class="input" type="number" name="pregnancies" ><br><br>
-            <label class="labels">Do any of your first-degree relatives<br> (parents, siblings) have diabetes?</label>
-            <span class="radio_1">
-                <input type="radio" id="first_degree_yes" name="first_degree_diabetes" value="yes" {% if first_degree_diabetes == 'yes' %}checked{% endif %}>
-                <label for="first_degree_yes">Yes</label>
-                <input type="radio" id="first_degree_no" name="first_degree_diabetes" value="no" {% if first_degree_diabetes == 'no' %}checked{% endif %}>
-                <label for="first_degree_no">No</label>
+    <div class="outer-box">
+        <h1>Female Diabetes Predictor</h1>
+        <form class='form-box' method="POST" action="/predict">
+            <span class="row">
+                <label class="labels">Age (years):</label>
+                <input value="{{age or ''}}" required class="input" type="number" name="age">
             </span>
-            <br><br>
-            <label class="labels">Do any of your second-degree relatives<br> (grandparents, aunts/uncles) have diabetes?</label>
-            <span class="radio_2">
-                <input type="radio" id="second_degree_yes" name="second_degree_diabetes" value="yes" {% if second_degree_diabetes == 'yes' %}checked{% endif %}>
-                <label for="second_degree_yes">Yes</label>
-                <input type="radio" id="second_degree_no" name="second_degree_diabetes" value="no" {% if second_degree_diabetes == 'no' %}checked{% endif %}>
-                <label for="second_degree_no">No</label>
+            
+            <span class="row">
+                <label class="labels">Glucose Level:</label>
+                <input value="{{glucose_level or ''}}" required class="input" type="number" name="glucose_level">
             </span>
-            <br>            
-            <button class="submit_btn" type="submit">Submit</button>
-            <button class="reset_btn" type="button" onclick="window.location.href='/'">Reset</button>
-        </form><br>
-            <span class="result">
-        {% if prediction %}
+            
+            <span class="row">
+                <label class="labels">Blood Pressure (mm Hg):</label>
+                <input value="{{bp_level or ''}}" required class="input" type="number" name="bp_level">
+            </span>
+            
+            <span class="row">
+                <label class="labels">Insulin (mu U/ml):</label>
+                <input value="{{insulin_level or ''}}" required class="input" type="number" name="insulin_level">
+            </span>
+            
+            <span class="row">
+                <label class="labels">Weight (kg):</label>
+                <input value="{{weight or ''}}" required class="input" type="number" name='weight'>
+            </span>
+            
+            <span class="row">
+                <label class="labels">Height (m):</label>
+                <input value="{{height or ''}}" required class="input" type="number" name="height">
+            </span>
+            
+            <span class="row"><label class="labels">Total No. of Pregnancies:</label>
+                <input value="{{pregnancies or ''}}" required class="input" type="number" name="pregnancies"></span>
+            
+            <span class="row row-radio">
+                <label class="labels radio_label">Do any of your first-degree relatives<br> (parents, siblings) have
+                    diabetes?</label>
+                <span class="radio_1">
+                    <input type="radio" id="first_degree_yes" name="first_degree_diabetes" value="yes" {% if
+                        first_degree_diabetes='yes' %}checked{% endif %}>
+                    <label for="first_degree_yes">Yes</label>
+                    <input type="radio" id="first_degree_no" name="first_degree_diabetes" value="no" {% if
+                        first_degree_diabetes='no' %}checked{% endif %}>
+                    <label for="first_degree_no">No</label>
+                </span>
+            </span>
+            
+            <span class="row row-radio">
+                <label class="labels radio_label">Do any of your second-degree relatives<br> (grandparents, aunts/uncles) have
+                    diabetes?</label>
+                <span class="radio_2">
+                    <input type="radio" id="second_degree_yes" name="second_degree_diabetes" value="yes" {% if
+                        second_degree_diabetes='yes' %}checked{% endif %}>
+                    <label for="second_degree_yes">Yes</label>
+                    <input type="radio" id="second_degree_no" name="second_degree_diabetes" value="no" {% if
+                        second_degree_diabetes='no' %}checked{% endif %}>
+                    <label for="second_degree_no">No</label>
+                </span>
+            </span>
+            <span class="row row_button">
+                <button class="submit_btn" type="submit">Submit</button>
+                <button class="reset_btn" type="button" onclick="window.location.href='/'">Reset</button>
+            </span>
+        </form>
+        <span class="result">
+            {% if prediction %}
             <h2>Prediction:</h2>
             {% if prediction == 1 %}
-                <h2 >Diabetic</h2>
+            <h2>Diabetic</h2>
             {% else %}
-                <h2 >Non Diabetic</h2>
+            <h2>Non Diabetic</h2>
             {% endif %}
-        {% endif %}
-        <script>document.querySelectorAll('input[type=number]').forEach(i=>i.setAttribute('step','any'))</script>
-
-    </span>
+            {% endif %}
+            <script>document.querySelectorAll('input[type=number]').forEach(i => i.setAttribute('step', 'any'))</script>
+        </span>
+    </div>   
 </body>
+
 </html>
