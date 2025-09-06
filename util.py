@@ -25,7 +25,7 @@ def diabetes_pedigree(first_degree_diabetes, second_degree_diabetes, age):
             base *= 1.1
     return base
 
-skin_thickness_df = pd.read_parquet("skinthickness.parquet")
+skin_thickness_df = pd.read_parquet("skin_thickness.parquet")
 scaler = joblib.load('scaler.pkl')
 transformer=joblib.load('transformer.pkl')
 model = joblib.load("Diabetes-Prediction.pkl")
