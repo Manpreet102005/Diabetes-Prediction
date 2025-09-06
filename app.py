@@ -17,18 +17,18 @@ def predict():
         try:
             age = request.form.get('age')
             pregnancies = request.form.get('pregnancies')
-            glucose = request.form.get('glucose_level')
-            bp = request.form.get('bp_level')
-            insulin = request.form.get('insulin_level')
+            glucose_level = request.form.get('glucose_level')
+            bp_level = request.form.get('bp_level')
+            insulin_level = request.form.get('insulin_level')
             weight = request.form.get('weight')
             height = request.form.get('height')
-            f_d_y = request.form.get('first_degree_diabetes')
-            s_d_y = request.form.get('second_degree_diabetes')
+            first_degree_diabetes = request.form.get('first_degree_diabetes')
+            second_degree_diabetes = request.form.get('second_degree_diabetes')
 
-            prediction_prob,error_message = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
+            prediction_prob,error_message = processing_inputs(age, pregnancies, glucose_level, bp_level, insulin_level, weight, height, first_degree_diabetes, second_degree_diabetes)            
             if error_message:
                 prediction=None
-                prediction=error_message
+                error_message=error_message
             else:
                 if prediction_prob >=0.6:
                     prediction = "Diabetic"
@@ -36,9 +36,9 @@ def predict():
                     prediction = "Non Diabetic"
         except Exception as e:
             error_message = "Something Went Wrong!"
-            return render_template("index.html", prediction=None,error_message=error_message)
+            return render_template("index.html", prediction=None,error_message=error_message,age=age,pregnancies=pregnancies,glucose_level=glucose_level,bp_level=bp_level,insulin_level=insulin_level,weight=weight,height=height,first_degree_diabetes=first_degree_diabetes,second_degree_diabetes=second_degree_diabetes)
 
-    return render_template("index.html",prediction=prediction,error_message=error_message)
+    return render_template("index.html",prediction=prediction,error_message=error_message,age=age,pregnancies=pregnancies,glucose_level=glucose_level,bp_level=bp_level,insulin_level=insulin_level,weight=weight,height=height,first_degree_diabetes=first_degree_diabetes,second_degree_diabetes=second_degree_diabetes)
 
 @app.route("/api/predict",methods=['POST'])
 def api_predict():

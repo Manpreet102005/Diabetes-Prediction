@@ -45,7 +45,7 @@ def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d
     x=[age,glucose,bp,insulin,bmi]
     for value in x:
         if value<=0:
-            error_message="Enter Valid Input(s)"
+            error_message="Value(s) Can't be Zero or Negative"
             return None,error_message           
     if pregnancies<0:
         error_message="No. of Pregnancies Can't be Negative"
