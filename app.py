@@ -27,6 +27,7 @@ def predict():
 
             prediction_prob,error_message = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
             if error_message:
+                prediction=None
                 prediction=error_message
             else:
                 if prediction_prob >=0.6:
@@ -34,10 +35,10 @@ def predict():
                 else:
                     prediction = "Non Diabetic"
         except Exception as e:
-            error_message = "Enter Valid Inputs"
-            return render_template("index.html", error_message=error_message)
+            error_message = "Something Went Wrong!"
+            return render_template("index.html", prediction=None,error_message=error_message)
 
-    return render_template("index.html",prediction=prediction)
+    return render_template("index.html",prediction=prediction,error_message=error_message)
 
 @app.route("/api/predict",methods=['POST'])
 def api_predict():
