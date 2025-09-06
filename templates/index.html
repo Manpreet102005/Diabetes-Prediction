@@ -77,8 +77,12 @@
         </form>
         <span class="result">
             {% if prediction %}
-                <h2>Prediction:</h2>
-                <h2>{{prediction}}</h2>
+            <h2>Prediction:</h2>
+            {% if prediction >=0.5 %}
+            <h2>Diabetic</h2>
+            {% else %}
+            <h2>Non Diabetic</h2>
+            {% endif %}
             {% endif %}
         </span>
         <script>document.querySelectorAll('input[type=number]').forEach(i => i.setAttribute('step', 'any'))</script>

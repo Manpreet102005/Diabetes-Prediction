@@ -65,5 +65,5 @@ def processing_inputs(age,pregnancies,glucose,bp,insulin,weight,height,f_d_y,s_d
     trans_cols=['Pregnancies','SkinThickness','Insulin','DiabetesPedigreeFunction','Age']
     X[trans_cols]=transformer.transform(X[trans_cols])
     scaled_X = scaler.transform(X)
-    prediction= model.predict_proba(scaled_X)[0]
+    prediction= model.predict_proba(scaled_X)[1]
     return prediction,error_message

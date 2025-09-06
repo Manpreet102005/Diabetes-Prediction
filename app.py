@@ -25,11 +25,11 @@ def predict():
             f_d_y = request.form.get('first_degree_diabetes')
             s_d_y = request.form.get('second_degree_diabetes')
 
-            prediction_prob,error_message = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
+            prediction_bin,error_message = processing_inputs(age, pregnancies, glucose, bp, insulin, weight, height, f_d_y, s_d_y)            
             if error_message:
                 prediction=error_message
             else:
-                if prediction_prob >= 0.5:
+                if prediction_bin >0.5:
                     prediction = "Diabetic"
                 else:
                     prediction = "Non Diabetic"
